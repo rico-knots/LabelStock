@@ -1,0 +1,18 @@
+<Project>
+
+    <PropertyGroup>
+        <!-- Language and null safety -->
+        <LangVersion>latest</LangVersion>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+
+        <!-- Code quality -->
+        <AnalysisLevel>latest-recommended</AnalysisLevel>
+        <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+        <TreatWarningsAsErrors Condition="'$(Configuration)' == 'Release'">true</TreatWarningsAsErrors>
+
+        <!-- Deterministic, reproducible builds -->
+        <Deterministic>true</Deterministic>
+    </PropertyGroup>
+
+</Project>

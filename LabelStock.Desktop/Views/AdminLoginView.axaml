@@ -1,0 +1,50 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:LabelStock.Desktop.ViewModels"
+             x:Class="LabelStock.Desktop.Views.AdminLoginView"
+             x:DataType="vm:AdminLoginViewModel">
+
+    <ScrollViewer>
+        <Border Classes="card" Margin="40,72,40,40" MaxWidth="560" Padding="44">
+            <StackPanel Spacing="28">
+
+                <StackPanel Spacing="16" HorizontalAlignment="Center">
+                    <Border Width="84" Height="84" CornerRadius="42" HorizontalAlignment="Center"
+                            Background="{DynamicResource AmberTintBrush}">
+                        <PathIcon Data="{DynamicResource IconLock}" Width="44" Height="44"
+                                  Foreground="{DynamicResource AmberInkBrush}" />
+                    </Border>
+                    <TextBlock Classes="title" Text="Admin" HorizontalAlignment="Center" />
+                    <TextBlock Classes="subtitle" TextAlignment="Center"
+                               Text="Type the admin password to change or delete things." />
+                </StackPanel>
+
+                <StackPanel Spacing="10">
+                    <TextBlock Classes="label" Text="Password" />
+                    <TextBox x:Name="PasswordBox" Classes="field" MinHeight="72" FontSize="28"
+                             PasswordChar="●"
+                             Text="{Binding Password}"
+                             PlaceholderText="Type the password">
+                        <TextBox.KeyBindings>
+                            <KeyBinding Gesture="Enter" Command="{Binding UnlockCommand}" />
+                        </TextBox.KeyBindings>
+                    </TextBox>
+                    <TextBlock Classes="error" Text="{Binding Error}"
+                               IsVisible="{Binding Error, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+                </StackPanel>
+
+                <StackPanel Spacing="14">
+                    <Button Classes="btn primary big" HorizontalAlignment="Stretch"
+                            Command="{Binding UnlockCommand}">
+                        <StackPanel Orientation="Horizontal" Spacing="12">
+                            <PathIcon Data="{DynamicResource IconLock}" Width="28" Height="28" />
+                            <TextBlock Text="Unlock" />
+                        </StackPanel>
+                    </Button>
+                    <Button Classes="btn secondary" MinHeight="64" HorizontalAlignment="Stretch"
+                            Command="{Binding CancelCommand}" Content="Cancel" />
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </ScrollViewer>
+</UserControl>

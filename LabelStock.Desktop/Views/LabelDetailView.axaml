@@ -1,0 +1,91 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:LabelStock.Desktop.ViewModels"
+             x:Class="LabelStock.Desktop.Views.LabelDetailView"
+             x:DataType="vm:LabelDetailViewModel">
+
+    <ScrollViewer>
+        <StackPanel Margin="40" MaxWidth="880" Spacing="24">
+
+            <Button Classes="btn secondary" HorizontalAlignment="Left"
+                    Command="{Binding BackCommand}">
+                <StackPanel Orientation="Horizontal" Spacing="10">
+                    <PathIcon Data="{DynamicResource IconChevronLeft}" Width="24" Height="24" />
+                    <TextBlock Text="Back to scanning" />
+                </StackPanel>
+            </Button>
+
+            <Border Classes="card" Padding="40">
+                <StackPanel Spacing="32">
+
+                    <!-- Name, kind and the quantity controls -->
+                    <Grid ColumnDefinitions="*,48,Auto">
+                        <StackPanel Spacing="14" VerticalAlignment="Center">
+                            <TextBlock Text="{Binding Name}" FontSize="52" FontWeight="Bold"
+                                       TextWrapping="Wrap" />
+                            <TextBlock Classes="hint" FontSize="18"
+                                       Text="{Binding Barcode, StringFormat='Barcode {0}'}" />
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2" Spacing="14" HorizontalAlignment="Center">
+                            <TextBlock Text="In stock" Classes="label" HorizontalAlignment="Center" />
+                            <StackPanel Orientation="Horizontal" Spacing="16">
+
+                                <StackPanel Spacing="8">
+                                    <Button Classes="stepper" Command="{Binding DecreaseCommand}"
+                                            AutomationProperties.Name="Take one out">
+                                        <PathIcon Data="{DynamicResource IconRemove}" Width="40" Height="40" />
+                                    </Button>
+                                    <TextBlock Classes="hint" Text="Take out 1" HorizontalAlignment="Center" />
+                                </StackPanel>
+
+                                <StackPanel Spacing="8">
+                                    <TextBox Classes="field" Width="180" Height="88"
+                                             FontSize="60" FontWeight="Bold"
+                                             HorizontalContentAlignment="Center"
+                                             Text="{Binding QuantityText}"
+                                             AutomationProperties.Name="Number in stock" />
+                                    <TextBlock Classes="hint" Text="or type a number" HorizontalAlignment="Center" />
+                                </StackPanel>
+
+                                <StackPanel Spacing="8">
+                                    <Button Classes="stepper add" Command="{Binding IncreaseCommand}"
+                                            AutomationProperties.Name="Add one">
+                                        <PathIcon Data="{DynamicResource IconAdd}" Width="40" Height="40" />
+                                    </Button>
+                                    <TextBlock Classes="hint" Text="Add 1" HorizontalAlignment="Center" />
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+
+                    <!-- Unsaved change: shows what changed and the Save button -->
+                    <Border Classes="notice warn" Padding="24,20" IsVisible="{Binding HasChange}">
+                        <Grid ColumnDefinitions="*,20,Auto">
+                            <TextBlock Text="{Binding ChangeText}" FontSize="22" TextWrapping="Wrap"
+                                       VerticalAlignment="Center" />
+                            <Button Grid.Column="2" Classes="btn primary big" Command="{Binding SaveCommand}">
+                                <StackPanel Orientation="Horizontal" Spacing="12">
+                                    <PathIcon Data="{DynamicResource IconCheck}" Width="28" Height="28" />
+                                    <TextBlock Text="Save" />
+                                </StackPanel>
+                            </Button>
+                        </Grid>
+                    </Border>
+
+                    <!-- Saved confirmation -->
+                    <Border Classes="notice ok" Padding="24,20" IsVisible="{Binding JustSaved}">
+                        <StackPanel Orientation="Horizontal" Spacing="14">
+                            <PathIcon Data="{DynamicResource IconCheck}" Width="30" Height="30" />
+                            <TextBlock Text="{Binding SavedText}" FontSize="22" FontWeight="Bold"
+                                       VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Border>
+
+                    <TextBlock Classes="error" Text="{Binding Error}"
+                               IsVisible="{Binding Error, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

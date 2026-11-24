@@ -1,0 +1,67 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:LabelStock.Desktop.ViewModels"
+             x:Class="LabelStock.Desktop.Views.NewLabelView"
+             x:DataType="vm:NewLabelViewModel">
+
+    <ScrollViewer>
+        <StackPanel Margin="40" MaxWidth="760" Spacing="24">
+
+            <!-- Only shown when we arrive here from a scan that found nothing -->
+            <Border Classes="notice warn" Padding="24,20" IsVisible="{Binding IsFromScan}">
+                <StackPanel Orientation="Horizontal" Spacing="18">
+                    <PathIcon Data="{DynamicResource IconInfo}" Width="36" Height="36" />
+                    <StackPanel Spacing="4" VerticalAlignment="Center">
+                        <TextBlock Text="This barcode is new" FontSize="24" FontWeight="Bold" />
+                        <TextBlock FontSize="18" TextWrapping="Wrap"
+                                   Text="It is not in the system yet. Fill in the details below to add it." />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <Border Classes="card" Padding="40">
+                <StackPanel Spacing="28">
+                    <TextBlock Text="New label" FontSize="36" FontWeight="Bold" />
+
+                    <StackPanel Spacing="10">
+                        <TextBlock Classes="label" Text="Barcode" />
+                        <TextBox x:Name="BarcodeBox" Classes="field" FontSize="28" FontWeight="Bold"
+                                 Text="{Binding Barcode}" />
+                        <TextBlock Classes="hint"
+                                   Text="Filled in by the scanner. You can scan again to replace it." />
+                    </StackPanel>
+
+                    <StackPanel Spacing="10">
+                        <TextBlock Classes="label" Text="Name" />
+                        <TextBox x:Name="NameBox" Classes="field"
+                                 Text="{Binding Name}"
+                                 PlaceholderText="For example: Gala apples" />
+                    </StackPanel>
+                    
+                    <StackPanel Spacing="10">
+                        <TextBlock Classes="label" Text="How many do you have now?" />
+                        <TextBox Classes="field" Width="220" HorizontalAlignment="Left"
+                                 FontSize="28"
+                                 Text="{Binding StartQuantityText}"
+                                 PlaceholderText="0" />
+                    </StackPanel>
+
+                    <TextBlock Classes="error" Text="{Binding Error}"
+                               IsVisible="{Binding Error, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+
+                    <Grid ColumnDefinitions="*,16,Auto" Margin="0,8,0,0">
+                        <Button Classes="btn primary big" HorizontalAlignment="Stretch"
+                                Command="{Binding SaveCommand}">
+                            <StackPanel Orientation="Horizontal" Spacing="12">
+                                <PathIcon Data="{DynamicResource IconCheck}" Width="28" Height="28" />
+                                <TextBlock Text="Save label" />
+                            </StackPanel>
+                        </Button>
+                        <Button Grid.Column="2" Classes="btn secondary big"
+                                Command="{Binding CancelCommand}" Content="Cancel" />
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

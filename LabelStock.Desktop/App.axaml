@@ -1,0 +1,11 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="LabelStock.Desktop.App"
+             RequestedThemeVariant="Light">
+    <!-- The design is light only, so don't follow the Windows dark mode setting. -->
+
+    <Application.Styles>
+        <FluentTheme />
+        <StyleInclude Source="avares://LabelStock.Desktop/Styles/Theme.axaml" />
+    </Application.Styles>
+</Application>

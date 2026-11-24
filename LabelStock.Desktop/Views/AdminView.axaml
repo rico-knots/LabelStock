@@ -1,0 +1,169 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:LabelStock.Desktop.ViewModels"
+             x:Class="LabelStock.Desktop.Views.AdminView"
+             x:DataType="vm:AdminViewModel">
+
+    <DockPanel>
+
+        <!-- Reminder that this is the dangerous mode -->
+        <Border DockPanel.Dock="Top" Classes="strip">
+            <StackPanel Orientation="Horizontal" Spacing="12" HorizontalAlignment="Center">
+                <PathIcon Data="{DynamicResource IconWarning}" Width="22" Height="22" />
+                <TextBlock Text="Admin mode. Be careful: deleting a label cannot be undone."
+                           FontWeight="Bold" VerticalAlignment="Center" />
+            </StackPanel>
+        </Border>
+
+        <ScrollViewer>
+            <StackPanel Margin="40,32" Spacing="24">
+
+                <Grid ColumnDefinitions="*,Auto">
+                    <TextBlock Classes="title" Text="Admin" VerticalAlignment="Center" />
+                    <Button Grid.Column="1" Classes="btn dark" MinHeight="52"
+                            Command="{Binding LockCommand}">
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <PathIcon Data="{DynamicResource IconLock}" Width="22" Height="22" />
+                            <TextBlock Text="Lock and leave admin" />
+                        </StackPanel>
+                    </Button>
+                </Grid>
+
+                <!-- Result of the last action -->
+                <Border Classes="notice ok" Padding="20,14"
+                        IsVisible="{Binding StatusMessage, Converter={x:Static StringConverters.IsNotNullOrEmpty}}">
+                    <TextBlock Text="{Binding StatusMessage}" FontSize="20" FontWeight="Bold"
+                               TextWrapping="Wrap" />
+                </Border>
+
+                <!-- Are you sure? (shown after pressing Delete on a row) -->
+                <Border Classes="notice danger" Padding="24,20" IsVisible="{Binding HasPendingDelete}">
+                    <Grid ColumnDefinitions="*,20,Auto,12,Auto">
+                        <TextBlock Text="{Binding DeleteQuestion}" FontSize="22" FontWeight="Bold"
+                                   TextWrapping="Wrap" VerticalAlignment="Center" />
+                        <Button Grid.Column="2" Classes="btn danger-solid"
+                                Command="{Binding ConfirmDeleteCommand}" Content="Yes, delete" />
+                        <Button Grid.Column="4" Classes="btn secondary"
+                                Command="{Binding CancelDeleteCommand}" Content="No, keep it" />
+                    </Grid>
+                </Border>
+
+                <Grid ColumnDefinitions="400,24,*">
+
+                    <!-- Left: backups, export, settings -->
+                    <StackPanel Spacing="24">
+
+                        <Border Classes="panel">
+                            <StackPanel Spacing="16">
+                                <TextBlock Classes="h2" Text="Backups" />
+
+                                <Border Classes="notice"
+                                        Classes.ok="{Binding BackupOk}"
+                                        Classes.warn="{Binding !BackupOk}">
+                                    <StackPanel Spacing="4">
+                                        <TextBlock Text="{Binding LastBackupText}" FontSize="20" FontWeight="Bold"
+                                                   TextWrapping="Wrap" />
+                                        <TextBlock Text="{Binding BackupNote}" FontSize="16" TextWrapping="Wrap" />
+                                    </StackPanel>
+                                </Border>
+
+                                <Button Classes="btn primary" HorizontalAlignment="Stretch"
+                                        Command="{Binding BackupNowCommand}" Content="Back up now" />
+                                <Button Classes="btn secondary" HorizontalAlignment="Stretch"
+                                        Command="{Binding RestoreCommand}" Content="Restore from a backup" />
+                            </StackPanel>
+                        </Border>
+
+                        <Border Classes="panel">
+                            <StackPanel Spacing="16">
+                                <TextBlock Classes="h2" Text="Export" />
+                                <TextBlock Classes="hint" FontSize="18"
+                                           Text="Save all labels and stock as a spreadsheet you can open in Excel." />
+                                <Button Classes="btn outline" HorizontalAlignment="Stretch"
+                                        Command="{Binding ExportCommand}">
+                                    <StackPanel Orientation="Horizontal" Spacing="10">
+                                        <PathIcon Data="{DynamicResource IconDownload}" Width="24" Height="24" />
+                                        <TextBlock Text="Export to spreadsheet" />
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Classes="panel">
+                            <StackPanel Spacing="14">
+                                <TextBlock Classes="h2" Text="Settings" />
+                                <Button Classes="btn secondary" HorizontalAlignment="Stretch"
+                                        Command="{Binding ChangePasswordCommand}" Content="Change admin password" />
+                                <Button Classes="btn secondary" HorizontalAlignment="Stretch"
+                                        Command="{Binding ChooseBackupFolderCommand}" Content="Choose backup folder" />
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+
+                    <!-- Right: all labels -->
+                    <Border Grid.Column="2" Classes="panel" VerticalAlignment="Top">
+                        <StackPanel Spacing="20">
+
+                            <Grid ColumnDefinitions="*,Auto,12,Auto">
+                                <TextBlock Classes="h2" Text="All labels" VerticalAlignment="Center" />
+                                <TextBox Grid.Column="1" Classes="field" Width="260" MinHeight="52" FontSize="20"
+                                         Text="{Binding FilterText}"
+                                         PlaceholderText="Find a label"
+                                         AutomationProperties.Name="Find a label" />
+                                <Button Grid.Column="3" Classes="btn primary" MinHeight="52" Padding="20,0"
+                                        FontSize="18" Command="{Binding NewLabelCommand}">
+                                    <StackPanel Orientation="Horizontal" Spacing="10">
+                                        <PathIcon Data="{DynamicResource IconAdd}" Width="22" Height="22" />
+                                        <TextBlock Text="New label" />
+                                    </StackPanel>
+                                </Button>
+                            </Grid>
+
+                            <!-- Table header -->
+                            <Border BorderBrush="{DynamicResource LineBrush}" BorderThickness="0,0,0,2" Padding="0,0,0,10">
+                                <Grid ColumnDefinitions="*,140,190,100,220">
+                                    <TextBlock Classes="hint" Text="Name" />
+                                    <TextBlock Grid.Column="1" Classes="hint" Text="Type" />
+                                    <TextBlock Grid.Column="2" Classes="hint" Text="Barcode" />
+                                    <TextBlock Grid.Column="3" Classes="hint" Text="In stock" HorizontalAlignment="Right" />
+                                    <TextBlock Grid.Column="4" Classes="hint" Text="Actions" HorizontalAlignment="Right" />
+                                </Grid>
+                            </Border>
+
+                            <!-- Table rows -->
+                            <ItemsControl ItemsSource="{Binding Rows}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate x:DataType="vm:LabelRowViewModel">
+                                        <Border BorderBrush="{DynamicResource LineBrush}"
+                                                BorderThickness="0,0,0,1" Padding="0,10">
+                                            <Grid ColumnDefinitions="*,140,190,100,220">
+                                                <TextBlock Text="{Binding Name}" FontSize="20" FontWeight="Bold"
+                                                           VerticalAlignment="Center" TextTrimming="CharacterEllipsis" />
+
+                                                <TextBlock Grid.Column="2" Text="{Binding Barcode}" FontSize="18"
+                                                           Foreground="{DynamicResource MutedBrush}"
+                                                           VerticalAlignment="Center" />
+
+                                                <TextBlock Grid.Column="3" Classes="qty" Text="{Binding QuantityText}"
+                                                           Classes.low="{Binding OutOfStock}"
+                                                           HorizontalAlignment="Right" VerticalAlignment="Center" />
+
+                                                <StackPanel Grid.Column="4" Orientation="Horizontal" Spacing="8"
+                                                            HorizontalAlignment="Right">
+                                                    <Button Classes="btn secondary small"
+                                                            Command="{Binding OpenCommand}" Content="Edit" />
+                                                    <Button Classes="btn danger small"
+                                                            Command="{Binding DeleteCommand}" Content="Delete" />
+                                                </StackPanel>
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
+    </DockPanel>
+</UserControl>

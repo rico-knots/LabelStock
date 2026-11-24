@@ -1,0 +1,85 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:LabelStock.Desktop.ViewModels"
+        xmlns:views="using:LabelStock.Desktop.Views"
+        x:Class="LabelStock.Desktop.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Title="LabelStock"
+        Width="1280" Height="800"
+        MinWidth="960" MinHeight="600"
+        WindowStartupLocation="CenterScreen"
+        Background="{DynamicResource PaperBrush}"
+        Foreground="{DynamicResource InkBrush}"
+        FontSize="18">
+
+    <!-- Which View belongs to which ViewModel. -->
+    <Window.DataTemplates>
+        <DataTemplate DataType="vm:ScanViewModel">
+            <views:ScanView />
+        </DataTemplate>
+        <DataTemplate DataType="vm:LabelDetailViewModel">
+            <views:LabelDetailView />
+        </DataTemplate>
+        <DataTemplate DataType="vm:NewLabelViewModel">
+            <views:NewLabelView />
+        </DataTemplate>
+        <DataTemplate DataType="vm:AdminLoginViewModel">
+            <views:AdminLoginView />
+        </DataTemplate>
+        <DataTemplate DataType="vm:SetAdminPasswordViewModel">
+            <views:SetAdminPasswordView />
+        </DataTemplate>
+        <DataTemplate DataType="vm:AdminViewModel">
+            <views:AdminView />
+        </DataTemplate>
+    </Window.DataTemplates>
+
+    <DockPanel>
+
+        <!-- Header: always visible -->
+        <Border DockPanel.Dock="Top" Classes="header">
+            <Grid ColumnDefinitions="*,Auto">
+                <StackPanel Orientation="Horizontal" Spacing="14" VerticalAlignment="Center">
+                    <Border Width="44" Height="44" CornerRadius="12"
+                            Background="{DynamicResource GreenBrush}">
+                        <PathIcon Data="{DynamicResource IconBarcode}" Width="26" Height="26"
+                                  Foreground="White" />
+                    </Border>
+                    <TextBlock Text="LabelStock" FontSize="26" FontWeight="Bold"
+                               VerticalAlignment="Center" />
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="16"
+                            VerticalAlignment="Center">
+
+                    <!-- Backup status: green when fine, amber when something is wrong -->
+                    <Border Classes="badge"
+                            Classes.ok="{Binding BackupOk}"
+                            Classes.warn="{Binding !BackupOk}">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <PathIcon Data="{DynamicResource IconCheck}" Width="20" Height="20"
+                                      IsVisible="{Binding BackupOk}" />
+                            <PathIcon Data="{DynamicResource IconWarning}" Width="20" Height="20"
+                                      IsVisible="{Binding !BackupOk}" />
+                            <TextBlock Text="{Binding BackupText}" FontSize="16" FontWeight="Bold"
+                                       VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Border>
+
+                    <Button Classes="btn secondary" MinHeight="48" Padding="20,0"
+                            Command="{Binding OpenAdminCommand}"
+                            IsVisible="{Binding ShowAdminButton}">
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <PathIcon Data="{DynamicResource IconLock}" Width="22" Height="22" />
+                            <TextBlock Text="Admin" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- The current screen -->
+        <ContentControl Content="{Binding Navigator.Current}" />
+
+    </DockPanel>
+</Window>

@@ -1,0 +1,321 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ===================== Colors (from the design) ===================== -->
+    <Styles.Resources>
+        <SolidColorBrush x:Key="PaperBrush" Color="#F6F4EE" />
+        <SolidColorBrush x:Key="SurfaceBrush" Color="#FFFFFF" />
+        <SolidColorBrush x:Key="LineBrush" Color="#D9D5C8" />
+        <SolidColorBrush x:Key="ControlLineBrush" Color="#A8A395" />
+        <SolidColorBrush x:Key="InkBrush" Color="#1F2A22" />
+        <SolidColorBrush x:Key="InkHoverBrush" Color="#2F3B33" />
+        <SolidColorBrush x:Key="MutedBrush" Color="#4F5A52" />
+        <SolidColorBrush x:Key="GreenBrush" Color="#1F6B3A" />
+        <SolidColorBrush x:Key="GreenHoverBrush" Color="#185A31" />
+        <SolidColorBrush x:Key="GreenDarkBrush" Color="#17542D" />
+        <SolidColorBrush x:Key="GreenTintBrush" Color="#E4F0E6" />
+        <SolidColorBrush x:Key="AmberTintBrush" Color="#FCEBD9" />
+        <SolidColorBrush x:Key="AmberInkBrush" Color="#7A3510" />
+        <SolidColorBrush x:Key="RedBrush" Color="#B42318" />
+        <SolidColorBrush x:Key="RedTintBrush" Color="#FDECEA" />
+        <SolidColorBrush x:Key="FocusBrush" Color="#E8A33D" />
+
+        <!-- ===================== Icons (Material Design icons, Apache 2.0, 24x24) ===================== -->
+        <StreamGeometry x:Key="IconCheck">M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z</StreamGeometry>
+        <StreamGeometry x:Key="IconSearch">M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z</StreamGeometry>
+        <StreamGeometry x:Key="IconAdd">M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z</StreamGeometry>
+        <StreamGeometry x:Key="IconRemove">M19 13H5v-2h14v2z</StreamGeometry>
+        <StreamGeometry x:Key="IconLock">M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z</StreamGeometry>
+        <StreamGeometry x:Key="IconChevronRight">M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z</StreamGeometry>
+        <StreamGeometry x:Key="IconChevronLeft">M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z</StreamGeometry>
+        <StreamGeometry x:Key="IconDownload">M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z</StreamGeometry>
+        <StreamGeometry x:Key="IconWarning">M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z</StreamGeometry>
+        <StreamGeometry x:Key="IconInfo">M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z</StreamGeometry>
+        <StreamGeometry x:Key="IconBarcode">M2 4h2v16H2z M6 4h1v16H6z M9 4h3v16H9z M14 4h1v16h-1z M17 4h2v16h-2z M21 4h1v16h-1z</StreamGeometry>
+    </Styles.Resources>
+
+    <!-- ===================== Text ===================== -->
+    <Style Selector="TextBlock.title">
+        <Setter Property="FontSize" Value="40" />
+        <Setter Property="FontWeight" Value="Bold" />
+    </Style>
+    <Style Selector="TextBlock.h2">
+        <Setter Property="FontSize" Value="26" />
+        <Setter Property="FontWeight" Value="Bold" />
+    </Style>
+    <Style Selector="TextBlock.subtitle">
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="Foreground" Value="{DynamicResource MutedBrush}" />
+    </Style>
+    <Style Selector="TextBlock.label">
+        <Setter Property="FontSize" Value="22" />
+        <Setter Property="FontWeight" Value="Bold" />
+    </Style>
+    <Style Selector="TextBlock.hint">
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="Foreground" Value="{DynamicResource MutedBrush}" />
+    </Style>
+    <Style Selector="TextBlock.error">
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="Foreground" Value="{DynamicResource RedBrush}" />
+    </Style>
+    <Style Selector="TextBlock.qty">
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="FontWeight" Value="Bold" />
+    </Style>
+    <Style Selector="TextBlock.qty.low">
+        <Setter Property="Foreground" Value="{DynamicResource RedBrush}" />
+    </Style>
+
+    <!-- ===================== Surfaces ===================== -->
+    <Style Selector="Border.header">
+        <Setter Property="Background" Value="{DynamicResource SurfaceBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource LineBrush}" />
+        <Setter Property="BorderThickness" Value="0,0,0,2" />
+        <Setter Property="Padding" Value="40,20" />
+    </Style>
+    <Style Selector="Border.card">
+        <Setter Property="Background" Value="{DynamicResource SurfaceBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource LineBrush}" />
+        <Setter Property="BorderThickness" Value="2" />
+        <Setter Property="CornerRadius" Value="24" />
+        <Setter Property="Padding" Value="36" />
+    </Style>
+    <Style Selector="Border.panel">
+        <Setter Property="Background" Value="{DynamicResource SurfaceBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource LineBrush}" />
+        <Setter Property="BorderThickness" Value="2" />
+        <Setter Property="CornerRadius" Value="20" />
+        <Setter Property="Padding" Value="28" />
+    </Style>
+    <Style Selector="Border.strip">
+        <Setter Property="Background" Value="{DynamicResource AmberTintBrush}" />
+        <Setter Property="TextElement.Foreground" Value="{DynamicResource AmberInkBrush}" />
+        <Setter Property="Padding" Value="40,12" />
+    </Style>
+
+    <!-- Banners: .notice is the base, .ok green, .warn amber -->
+    <Style Selector="Border.notice">
+        <Setter Property="CornerRadius" Value="14" />
+        <Setter Property="Padding" Value="16,14" />
+    </Style>
+    <Style Selector="Border.notice.ok">
+        <Setter Property="Background" Value="{DynamicResource GreenTintBrush}" />
+        <Setter Property="TextElement.Foreground" Value="{DynamicResource GreenDarkBrush}" />
+    </Style>
+    <Style Selector="Border.notice.warn">
+        <Setter Property="Background" Value="{DynamicResource AmberTintBrush}" />
+        <Setter Property="TextElement.Foreground" Value="{DynamicResource AmberInkBrush}" />
+    </Style>
+    <Style Selector="Border.notice.danger">
+        <Setter Property="Background" Value="{DynamicResource RedTintBrush}" />
+        <Setter Property="TextElement.Foreground" Value="{DynamicResource RedBrush}" />
+    </Style>
+
+    <!-- Backup badge in the header -->
+    <Style Selector="Border.badge">
+        <Setter Property="CornerRadius" Value="999" />
+        <Setter Property="Padding" Value="16,10" />
+    </Style>
+    <Style Selector="Border.badge.ok">
+        <Setter Property="Background" Value="{DynamicResource GreenTintBrush}" />
+        <Setter Property="TextElement.Foreground" Value="{DynamicResource GreenDarkBrush}" />
+    </Style>
+    <Style Selector="Border.badge.warn">
+        <Setter Property="Background" Value="{DynamicResource AmberTintBrush}" />
+        <Setter Property="TextElement.Foreground" Value="{DynamicResource AmberInkBrush}" />
+    </Style>
+
+    <!-- Fruit / Vegetable pill -->
+    <Style Selector="Border.pill">
+        <Setter Property="CornerRadius" Value="999" />
+        <Setter Property="Padding" Value="14,5" />
+    </Style>
+    <Style Selector="Border.pill.fruit">
+        <Setter Property="Background" Value="{DynamicResource AmberTintBrush}" />
+        <Setter Property="TextElement.Foreground" Value="{DynamicResource AmberInkBrush}" />
+    </Style>
+    <Style Selector="Border.pill.vegetable">
+        <Setter Property="Background" Value="{DynamicResource GreenTintBrush}" />
+        <Setter Property="TextElement.Foreground" Value="{DynamicResource GreenDarkBrush}" />
+    </Style>
+
+    <!-- ===================== Text boxes ===================== -->
+    <Style Selector="TextBox.field">
+        <Setter Property="MinHeight" Value="64" />
+        <Setter Property="FontSize" Value="26" />
+        <Setter Property="Padding" Value="20,0" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="CornerRadius" Value="16" />
+        <Setter Property="Foreground" Value="{DynamicResource InkBrush}" />
+    </Style>
+    <Style Selector="TextBox.field /template/ Border#PART_BorderElement">
+        <Setter Property="Background" Value="{DynamicResource SurfaceBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource GreenBrush}" />
+        <Setter Property="BorderThickness" Value="3" />
+    </Style>
+    <Style Selector="TextBox.field:focus /template/ Border#PART_BorderElement">
+        <Setter Property="BorderBrush" Value="{DynamicResource FocusBrush}" />
+        <Setter Property="BorderThickness" Value="3" />
+    </Style>
+
+    <!-- ===================== Buttons =====================
+         Use Classes="btn primary", "btn outline", "btn secondary", "btn dark", "btn danger".
+         Add "big" or "small" for a different size. The rules that target ContentPresenter
+         are needed because the Fluent theme paints the button through its template. -->
+    <Style Selector="Button.btn">
+        <Setter Property="MinHeight" Value="56" />
+        <Setter Property="Padding" Value="24,0" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="CornerRadius" Value="14" />
+        <Setter Property="BorderThickness" Value="3" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Cursor" Value="Hand" />
+    </Style>
+    <Style Selector="Button.btn.big">
+        <Setter Property="MinHeight" Value="72" />
+        <Setter Property="Padding" Value="36,0" />
+        <Setter Property="FontSize" Value="24" />
+    </Style>
+    <Style Selector="Button.btn.small">
+        <Setter Property="MinHeight" Value="44" />
+        <Setter Property="Padding" Value="16,0" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="BorderThickness" Value="2" />
+    </Style>
+
+    <Style Selector="Button.primary /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource GreenBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource GreenBrush}" />
+        <Setter Property="Foreground" Value="White" />
+    </Style>
+    <Style Selector="Button.primary:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource GreenHoverBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource GreenHoverBrush}" />
+    </Style>
+
+    <Style Selector="Button.outline /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource SurfaceBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource GreenBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource GreenDarkBrush}" />
+    </Style>
+    <Style Selector="Button.outline:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource GreenTintBrush}" />
+    </Style>
+
+    <Style Selector="Button.secondary /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource SurfaceBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource InkBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource InkBrush}" />
+    </Style>
+    <Style Selector="Button.secondary:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource PaperBrush}" />
+    </Style>
+
+    <Style Selector="Button.dark /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource InkBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource InkBrush}" />
+        <Setter Property="Foreground" Value="White" />
+    </Style>
+    <Style Selector="Button.dark:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource InkHoverBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource InkHoverBrush}" />
+    </Style>
+
+    <Style Selector="Button.danger /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource SurfaceBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource RedBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource RedBrush}" />
+    </Style>
+    <Style Selector="Button.danger:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource RedTintBrush}" />
+    </Style>
+
+    <!-- Solid red button for the confirmed delete -->
+    <Style Selector="Button.danger-solid /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource RedBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource RedBrush}" />
+        <Setter Property="Foreground" Value="White" />
+    </Style>
+
+    <!-- A whole list row that can be clicked -->
+    <Style Selector="Button.row">
+        <Setter Property="MinHeight" Value="72" />
+        <Setter Property="Padding" Value="24,14" />
+        <Setter Property="CornerRadius" Value="16" />
+        <Setter Property="BorderThickness" Value="2" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Foreground" Value="{DynamicResource InkBrush}" />
+    </Style>
+    <Style Selector="Button.row /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource SurfaceBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource LineBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource InkBrush}" />
+    </Style>
+    <Style Selector="Button.row:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource PaperBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource GreenBrush}" />
+    </Style>
+
+    <!-- Fruit / Vegetable toggle buttons -->
+    <Style Selector="Button.choice">
+        <Setter Property="MinHeight" Value="72" />
+        <Setter Property="FontSize" Value="26" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="CornerRadius" Value="16" />
+        <Setter Property="BorderThickness" Value="3" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Cursor" Value="Hand" />
+    </Style>
+    <Style Selector="Button.choice /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource SurfaceBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlLineBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource InkBrush}" />
+    </Style>
+    <Style Selector="Button.choice:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource PaperBrush}" />
+    </Style>
+    <Style Selector="Button.choice.selected /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource GreenTintBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource GreenBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource GreenDarkBrush}" />
+    </Style>
+
+    <!-- Big square - / + buttons -->
+    <Style Selector="Button.stepper">
+        <Setter Property="Width" Value="88" />
+        <Setter Property="Height" Value="88" />
+        <Setter Property="CornerRadius" Value="20" />
+        <Setter Property="BorderThickness" Value="3" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Cursor" Value="Hand" />
+    </Style>
+    <Style Selector="Button.stepper /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource SurfaceBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource InkBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource InkBrush}" />
+    </Style>
+    <Style Selector="Button.stepper:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource PaperBrush}" />
+    </Style>
+    <Style Selector="Button.stepper.add /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource GreenBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource GreenBrush}" />
+        <Setter Property="Foreground" Value="White" />
+    </Style>
+    <Style Selector="Button.stepper.add:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource GreenHoverBrush}" />
+    </Style>
+</Styles>
